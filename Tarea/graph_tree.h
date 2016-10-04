@@ -1,6 +1,6 @@
 /*30/09/2016
  *Autor: Manuel Gomes 11-10375
- *Descripción: Archivo con las funciones empeadas en la resolución del problema
+ *Descripción: Archivo con las firmas de las funciones empleadas en la resolución del problema
  */
 
 

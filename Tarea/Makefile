@@ -1,4 +1,4 @@
-CCFLAGS = -g -Wall
+CCFLAGS = -g -Wall -std=c99
 
 prueba: main.c graph_tree.o
 	gcc $(CCFLAGS) main.c graph_tree.o -o $@
@@ -8,4 +8,5 @@ graph_tree.o: graph_tree.h graph_tree.c
 
 clean:
 	rm -rf *.o prueba
+
 
