@@ -3,41 +3,34 @@
 
 int main(int argc, char const *argv[])
 {
-	/*
-	int a,b;
-
-	while (a!=-1 && b!=-1)
-		Graph* g = createG();
-		while (scanf("%d %d",a,b) && (a!=0 && b!=0)){
-			;
-		};
-		printGraph(g);
-		deleteGraph(g);
-	*/
+	if (argv[1] == NULL) {
+		printf("Entrada vacía. \n");
+		return 0;
+	}
 	int a,b,i;
-	Graph* t=createG();
 
 	FILE* fp;
-	fp = fopen("input", "r");
-	i=0;
+	fp = fopen(argv[1], "r");
+	Graph* g = createG();
+	i = 1;
 	while (fscanf(fp,"%d %d", &a,&b) != EOF){
-		printf("PAR %d : %d %d\n", i,a,b);
-		i++;
 		if (a > 0 && b > 0) {
-			addPair(t,a,b);
-			printf("Par %d\n", i );
-			//printGraph(t);
-			printf("---------------------------------------\n");
+			addPair(g,a,b);
+
 		}
 		else if (a == 0 && a == 0) {
-			//isTree
-			printGraph(t);
-			deleteGraph(t);
-			t=createG();
+			printf("Caso %d ", i);
+			isTree(g) ? printf("es") : printf("no es");
+			printf(" una arborescencia.\n");
+			//printGraph(g);
+			deleteGraph(g);
+			g = createG();
+			i++;
 		}
 		else
 			break;
 	}
-
+	fclose(fp);
+	deleteGraph(g);
 	return 0;
 }

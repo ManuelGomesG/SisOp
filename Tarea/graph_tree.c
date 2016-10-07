@@ -5,6 +5,8 @@
 
 
 #include "graph_tree.h"
+
+
 //Creación de las estructuras
 Graph* createG(){
 	Graph* g;
@@ -118,4 +120,45 @@ void printGraph(Graph* g){
 	if (g==NULL)
 		return;
 	printN(g->first);
+}
+
+
+/*----------------- Verificación-------------------*/
+
+
+int isTreeAux(Node* n, Matrix* matrix) {
+	if (n == NULL) {
+		return 1;
+	}
+	if (visit(matrix, n)) {
+		killMatrix(matrix);
+		return 0;
+	}
+	for (Edge* aux = n->children; aux != NULL; aux = aux->next) {
+		if (!isTreeAux(aux->to, matrix)) {
+			return 0;
+		}
+	}
+	return 1;
+
+
+}
+
+int isTree(Graph* g) {
+	if (g->n == 0)	
+		return 1;
+	Matrix* matrix = createMatrix(g);
+	for (Node* aux = g->first; aux != NULL; aux = aux->next) {
+		cleanMatrix(matrix);
+		if (isTreeAux(aux, matrix) && allVisited(matrix)) {
+			deleteMatrix(matrix);
+			return 1;
+		}
+		if (isDead(matrix)) {
+			deleteMatrix(matrix);
+			return 0;
+		}
+	}
+	deleteMatrix(matrix);
+	return 0;
 }

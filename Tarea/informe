@@ -1,0 +1,11 @@
+Se presenta una solución al problema de decidir si un grafo es una arborescencia o no. Para ello seimplementaron las siguientes estructuras: 
+Node: estructura que contiene los atributos n, que es el contendido del nodo (el entreo positivo que lo identifica); children: que es una lista enlazada de referencias a nodos, que será explicada más adelante; next que es un apuntador al siguiente nodo de la lista de nodos global.
+Edge: Estructura que representa las aristas de un grafo, es decir, dado un nodo, Edge es la ista de apuntadores a sus nodos hijos o adyacentes. Consta de los siguientes atributos: to, apuntador a nodo (apuntador hacia un hijo); next, apuntador hacia la siguiente arista de la lista.
+Graph: cabezera del grafo, que contiene un apuntador al primer elemento de la lista general de nodos llamado first y un contador de nodos llamado n.
+
+Con estas estructuras se implementa el grafo como una lista de nodos y cada nodo tiene una lista propia.
+
+
+Para la verificación de la arborescecia se implementó una matriz llamada matrix, que tiene los siguientes atributos n, que es la cantidad de nodos del grafo, s que es la cantidad de nodos que se han agregado a la matriz, d, que dice si la matriz es válida o no y m que es la lista de nodos recorridos.
+
+Básicamente se recorre el grafo desde el primer nodo del mismo y agrega cada nodo a la lista, si se alcanzan todos los nodos quiere decir que m->n y m->s tienen el mismo valor y d debe ser 0 en todo momento. Si d no es 0 quiere decir que se alcanzó el mismo nodo por 2 caminos distintos, lo que implica que el grafo no es una arborescencia. Si luego de recorrer el grafo desde un nodo no se alcanzan todos los demás se procede a repetir el proceso a partir del siguiente nodo de la lista general de nodos. Si en ningún caso se alcanzan todos los nodos entonces el grafo no es una arborescencia. 

@@ -3,6 +3,8 @@
  *Descripción: Archivo con las firmas de las funciones empleadas en la resolución del problema
  */
 
+#ifndef GRAPH
+#define GRAPH
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,9 +28,15 @@ typedef struct _graph {
 	Node* first;
 } Graph;
 
+#include "matrix.h"
+
 
 Graph* createG();
 void printGraph(Graph*);
 void deleteGraph(Graph*);
+int isTreeAux(Node*, Matrix*);
 int isTree(Graph*);
 void addPair(Graph*, int, int);
+
+
+#endif
