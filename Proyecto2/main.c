@@ -6,8 +6,6 @@
 int main(int argc, char  * const argv[]) {
 	
   	char* directory = NULL;
-    char* output;
-
 
     int children = 0;
     int c;
@@ -45,60 +43,38 @@ int main(int argc, char  * const argv[]) {
         }
     }
  
-    output = argv[optind];
-
 
     if (directory == NULL) 
         directory = ".";
     else 
         chdir(directory);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    printf("%s , %d , %s\n", directory,children, output );
+ 
 
     dQhead* dq = createDQ();
-    list(directory,dq);
-    list1(directory);
+    cAQueue* ca= createCAQ();
+    addCAtoQ(ca,list(directory));
+    dq = ca -> first -> toAdd;
+ 	while (isEmptyQ(dq) == 0) {
+ 		addCAtoQ(ca,list(dq -> first -> dir));
+ 		concatQs(dq,ca -> last -> toAdd);
+ 		popFromQ(dq);
+ 	}
+ 	if (argv[optind] == NULL) {
+	 	while (!isEmptyCAQ(ca)) {
+	 		printf("%d 		%s\n",  ca -> first -> size, ca -> first -> path);
+	 		popFromCAQ(ca);
+	 	}
+ 	}
+ 	else {
+ 		FILE* fp;
+ 		fp = fopen(argv[optind],"w");
 
-
-
-
-
-
-
-
-
-
-
-
-    //printQ(dq);
+ 		while (!isEmptyCAQ(ca)) {
+	 		fprintf(fp,"%d 		%s\n",  ca -> first -> size, ca -> first -> path);
+	 		popFromCAQ(ca);
+	 	}
+ 	}
 
 	return 0;
 }

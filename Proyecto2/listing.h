@@ -5,5 +5,5 @@
 #include <unistd.h>
 
 
-void list(const char *path, dQhead*);
+childAnswer* list( char *path);
 void list1(const char* path);
